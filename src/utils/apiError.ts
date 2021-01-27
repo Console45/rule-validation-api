@@ -1,4 +1,4 @@
-import { json, NextFunction, Request, Response } from "express";
+import { NextFunction, Request, Response } from "express";
 
 enum HttpErrorCodes {
   BAD_REQUEST = 400,
