@@ -2,10 +2,8 @@ import { BadRequest } from "./../utils/apiError";
 import { Request, Response, NextFunction } from "express";
 
 // validate the rule field
-const checkField = (field: string): void => {
+const checkField = (field: any): void => {
   if (!field) throw new BadRequest("rule field is required.", null);
-  if (typeof field !== "string")
-    throw new BadRequest("rule field should be a string.", null);
 };
 
 // validate the rule condition field
@@ -19,7 +17,7 @@ const checkCondition = (condition: string): void => {
 };
 
 // validate the rule condition value field
-const checkConditionValue = (condition_value: number): void => {
+const checkConditionValue = (condition_value: string | number): void => {
   if (!condition_value)
     throw new BadRequest("rule condition value is required.", null);
 };
