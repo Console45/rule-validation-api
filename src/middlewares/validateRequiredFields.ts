@@ -41,31 +41,6 @@ const validateData = (data: any): any => {
   if (!data) throw new BadRequest("data is required.", null);
 };
 
-// check if fields in rule objects exist in data
-const checkFields = (field: string, data: any) => {
-  //field validation error
-  const fieldError: BadRequest = new BadRequest(
-    `field ${field} is missing from data.`,
-    null
-  );
-
-  if (typeof data === "object") {
-    //check if fields in rule objects exist in data object
-    const hasField = (field: string, data: any): void => {
-      if (!(field in data)) {
-        throw fieldError;
-      }
-    };
-    //check for nested fields
-    if (field.includes(".")) {
-      const keys: string[] = field.split(".");
-      if (keys[0] in data) {
-        hasField(keys[1], data[keys[0]]);
-      } else throw fieldError;
-    } else hasField(field, data);
-  }
-};
-
 export const validateRequiredFields = (
   { body }: Request,
   res: Response,
@@ -75,7 +50,6 @@ export const validateRequiredFields = (
   try {
     validateRule(rule);
     validateData(data);
-    checkFields(rule.field, data);
     next();
   } catch (err) {
     next(err);
