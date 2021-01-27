@@ -22,8 +22,6 @@ const checkCondition = (condition: string): void => {
 const checkConditionValue = (condition_value: number): void => {
   if (!condition_value)
     throw new BadRequest("rule condition value is required.", null);
-  if (typeof condition_value !== "number")
-    throw new BadRequest("rule condition value should be a number.", null);
 };
 
 //validate the rule field
