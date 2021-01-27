@@ -1,4 +1,4 @@
-import { NextFunction, Request, Response } from "express";
+import { json, NextFunction, Request, Response } from "express";
 
 enum HttpErrorCodes {
   BAD_REQUEST = 400,
@@ -119,11 +119,25 @@ export const apiErrorHandler = (
   res: Response,
   next: NextFunction
 ) => {
+  // api error response
   if (err instanceof ApiError) {
     return res
       .status(err.code)
       .json({ status: "error", message: err.message, data: err.data });
   }
+  //invalid payload response
+  if (
+    err instanceof SyntaxError &&
+    (err as any).status === 400 &&
+    "body" in err
+  ) {
+    return res.status(HttpErrorCodes.BAD_REQUEST).json({
+      status: "error",
+      message: "Invalid JSON payload passed.",
+      data: null,
+    });
+  }
+
   res
     .status(HttpErrorCodes.INTERNAL_SERVER)
     .json({ status: "error", message: err.message, data: null });
