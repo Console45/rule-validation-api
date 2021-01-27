@@ -122,9 +122,9 @@ export const apiErrorHandler = (
   if (err instanceof ApiError) {
     return res
       .status(err.code)
-      .send({ status: "error", message: err.message, data: null });
+      .json({ status: "error", message: err.message, data: err.data });
   }
   res
     .status(HttpErrorCodes.INTERNAL_SERVER)
-    .send({ status: "error", message: err.message });
+    .json({ status: "error", message: err.message, data: null });
 };
