@@ -61,7 +61,7 @@ export const apiErrorHandler = (
   if (err instanceof ApiError) {
     return res
       .status(err.code)
-      .json({ status: "error", message: err.message, data: err.data });
+      .json({ message: err.message, status: "error", data: err.data });
   }
   //invalid payload response
   if (
@@ -70,13 +70,13 @@ export const apiErrorHandler = (
     "body" in err
   ) {
     return res.status(HttpErrorCodes.BAD_REQUEST).json({
-      status: "error",
       message: "Invalid JSON payload passed.",
+      status: "error",
       data: null,
     });
   }
 
   res
     .status(HttpErrorCodes.INTERNAL_SERVER)
-    .json({ status: "error", message: err.message, data: null });
+    .json({ message: err.message, status: "error", data: null });
 };
