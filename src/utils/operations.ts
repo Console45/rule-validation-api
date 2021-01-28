@@ -41,6 +41,10 @@ export abstract class Operations {
       } else throw this.createErrorResponse("fieldValidation");
     } else hasField(this.rule.field, this.data);
   }
+
+  /**
+   * checks if field in rule object exists in data when data is an array or string
+   */
   checkDataFields(): void {
     if (
       this.data[this.rule.field] === undefined ||
