@@ -3,11 +3,12 @@ import { Request, Response, NextFunction } from "express";
 
 // validate the rule field
 const checkField = (field: any): void => {
-  if (!field) throw new BadRequest("rule field is required.", null);
+  if (field === undefined || field === null)
+    throw new BadRequest("rule field is required.", null);
 };
 
 // validate the rule condition field
-const checkCondition = (condition: string): void => {
+const checkCondition = (condition: any): void => {
   if (!condition) throw new BadRequest("rule condition is required.", null);
   if (!/\beq\b|\bcontains\b|\bgte\b|\bneq\b|\bgt\b/g.test(condition))
     throw new BadRequest(
@@ -17,8 +18,8 @@ const checkCondition = (condition: string): void => {
 };
 
 // validate the rule condition value field
-const checkConditionValue = (condition_value: string | number): void => {
-  if (!condition_value)
+const checkConditionValue = (condition_value: any): void => {
+  if (condition_value === undefined || condition_value === null)
     throw new BadRequest("rule condition value is required.", null);
 };
 
