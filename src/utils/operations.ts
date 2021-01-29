@@ -4,8 +4,8 @@ import { BadRequest } from "./apiError";
 export type SuccessResponse = Response<any, Record<string, any>>;
 
 /**
- * @abstract
  * Class to perform operations on field and data
+ * @abstract
  */
 export abstract class Operations {
   readonly rule: any;
