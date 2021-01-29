@@ -30,7 +30,7 @@ function main() {
       const { rule, data }: any = body;
       const validateData: ValidateData = new ValidateData(res, rule, data);
       try {
-        //working with array data
+        //working with array or string data
         if (Array.isArray(data) || typeof data === "string") {
           validateData.checkDataFields();
           validateData.checkConditions();
