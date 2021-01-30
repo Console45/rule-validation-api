@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { Operations, SuccessResponse } from "./operations";
+import { Operations } from "./operations";
 
 /**
  * Class to validate data against rule
@@ -19,7 +19,7 @@ export class ValidateData extends Operations {
    *  Check data against the condition value
    * @returns A Success Response
    */
-  checkConditions(): SuccessResponse {
+  checkConditions(): Response {
     // check for eq condition
     if (this.rule.condition === "eq") {
       if (this.data[this.rule.field] !== this.rule.condition_value) {
@@ -64,7 +64,7 @@ export class ValidateData extends Operations {
    *  Check nested field data against the condition value
    * @returns A Success Response
    */
-  checkNestedFieldConditions(): SuccessResponse {
+  checkNestedFieldConditions(): Response {
     const keys: readonly string[] = this.getNestedFieldsKeys();
     // check for eq condition
     if (this.rule.condition === "eq") {
