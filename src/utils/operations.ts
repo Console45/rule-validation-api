@@ -1,8 +1,6 @@
 import { Response } from "express";
 import { BadRequest } from "./apiError";
 
-export type SuccessResponse = Response<any, Record<string, any>>;
-
 /**
  * Class to perform operations on field and data
  * @abstract
@@ -86,7 +84,7 @@ export abstract class Operations {
    * @param {Response} res express response object
    * @returns A successful JSON response
    */
-  createSuccessResponse(): SuccessResponse {
+  createSuccessResponse(): Response {
     return this.res.json({
       message: `field ${this.rule.field} successfully validated.`,
       status: "success",
